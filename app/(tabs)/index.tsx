@@ -1,74 +1,81 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Image, Platform, View, Text, TouchableOpacity, useColorScheme } from 'react-native';
+import ImageLogo from '../../assets/images/CasaDoPassarinhoLogo.png'
+import { useRouter } from 'expo-router';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function TabTwoScreen() {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+  const router = useRouter();
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+      <Image
+        source={ImageLogo}
+        style={{
+          height: 200,
+          width: 200,
+          margin: 50
+        }}
+        resizeMode='contain'
+      />
+      <Text style={[styles.title, { color: theme.colors.text }]}>Bem Vindo</Text>
+      <Text style={[styles.subTitle, { color: theme.colors.text }]}>Associação Educacional e Assistencial Casa do Passarinho (CPSA), 
+        é uma organização Educacional, Cultural, Artístico, Esportivo e de Assistência Social, 
+        como instrumento de promoção do ser humano, com sede e foro no Campo Limpo, cidade de São Paulo, 
+        acolhendo algumas das regiões mais vulneráveis de São Paulo: Parque Arariba, Jardim Piracuama, Jardim Promorar, Jardim Umuarama, Capão Redondo e bairros próximos.</Text>
+
+      <TouchableOpacity 
+        style={[
+          styles.firstButton, 
+          { 
+            backgroundColor: theme.colors.card, 
+            borderColor: theme.colors.border,
+            borderWidth: 1
+          }
+        ]}
+        onPress={() => router.push('/quem-somos')}
+      >
+        <Text style={{ color: theme.colors.text }}>
+          Quem Somos
+        </Text>
+      </TouchableOpacity>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    subTitle: {
+      fontSize: 14,
+      maxWidth: '74%',
+      fontWeight: 'bold',
+      textAlign: 'center'
+    },
+    firstButton: {
+      fontWeight: 'bold',
+      height: 56,
+      width: 100,
+      borderRadius: 8,
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 20
+    },
+    secondButton: {
+      height: 64,
+      width: 60,
+      backgroundColor: '#55c7d4',
+      borderRadius: 8,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+})
