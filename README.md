@@ -5,7 +5,7 @@ Esse projeto foi criado com [Expo](https://expo.dev) e com [`create-expo-app`](h
 ## Começando
 1. Clone nosso repositório
    ```bash
-   git https://github.com/Rafa1123XD/Projeto-ONG.git
+   git clone https://github.com/Rafa1123XD/Projeto-ONG.git
    cd Projeto-ONG
    ```
    
